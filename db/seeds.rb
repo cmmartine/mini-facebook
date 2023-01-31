@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+User.create!(username: 'Alfred', email: 'alfred@email.com', password: 'alfred1', password_confirmation: 'alfred1')
+
+User.create!(username: 'Becca', email: 'becca@email.com', password: 'becca1', password_confirmation: 'becca1')
+
+Post.create!(body: 'This is the first testing post for this app!', user_id: 1)
+
+Comment.create!(body: 'This post is the best ever', user_id: 2, post_id: 1)
+
+Like.create!(user_id: 2, post_id: 1)
+
+Request.create!(receiving_user_id: 2, sending_user_id: 1)
+
+p 'Some database items created'
