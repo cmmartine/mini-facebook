@@ -1,0 +1,4 @@
+<%= form_with model: @post do |f| %>
+  <%= f.text_area :body, size: "100x30", class: "post-form" %>
+  <%= f.submit "Create Post" %>
+<% end %>

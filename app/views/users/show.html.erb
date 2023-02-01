@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+</head>
+<body>
+  <%= render "shared/navigation-bar" %>
+
+
+  <%= link_to 'Create a Post', new_post_path %>
+   <% if current_user.posts.any? %>
+    <% current_user.posts.each do |post| %>
+      <p class="user-page-post"><%= post.body %></p>
+    <% end %>
+  <% end %>
+</body>
+</html>

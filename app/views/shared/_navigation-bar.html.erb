@@ -1,0 +1,14 @@
+<div class="navbar">
+  <h2>Mini-Facebook</h2>
+  
+  <div class="nav-icon">
+    <%= link_to root_path do %>
+      <%= image_tag "earth.png", class:"icon" %>
+    <% end %>
+
+
+    <%= link_to user_path(current_user) do %>
+      <%= image_tag "account-box.png", class:"icon" %>
+    <% end %>
+ </div>
+</div>
