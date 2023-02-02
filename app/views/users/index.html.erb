@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications</title>
+</head>
+<body>
+  <%= render "shared/navigation-bar" %>
+
+  <h1>Notifications</h1>
+  <h3>Pending Received Requests:</h3>
+  <% if current_user.received_requests.any? %>
+    <% current_user.received_requests.each do |request| %>
+      <% user = User.find_by(id: request.sending_user_id) %>
+      <%= link_to "#{user.username}", user_path(user.id) %>
+    <% end %>
+  <% end %>
+
+  <h3>Pending Sent Requests:</h3>
+  <% if current_user.sent_requests.any? %>
+    <% current_user.sent_requests.each do |request| %>
+      <% user = User.find_by(id: request.receiving_user_id) %>
+      <%= link_to "#{user.username}", user_path(user.id) %>
+    <% end %>
+  <% end %>
+
+  <h2>Users you may know:</h2>
+  <% User.all.each do |user| %>
+    <% if user != current_user %>
+      <%= link_to "#{user.username}", user_path(user.id) %>
+    <% end %>
+  <% end %>
+</body>
+</html>

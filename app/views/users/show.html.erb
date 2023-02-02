@@ -9,11 +9,12 @@
 <body>
   <%= render "shared/navigation-bar" %>
 
+  <h1><%=User.find(params[:id]).username%></h1>
 
   <%= link_to 'Create a Post', new_post_path %>
-   <% if current_user.posts.any? %>
-    <% current_user.posts.each do |post| %>
-      <p class="user-page-post"><%= post.body %></p>
+    <% if User.find(params[:id]).posts.any? %>
+      <% User.find(params[:id]).posts.each do |post| %>
+        <p class="user-page-post"><%= post.body %></p>
     <% end %>
   <% end %>
 </body>

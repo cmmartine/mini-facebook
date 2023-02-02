@@ -6,9 +6,14 @@
       <%= image_tag "earth.png", class:"icon" %>
     <% end %>
 
+    <%= link_to users_path do %>
+     <%= image_tag "account-multiple.png", class:"icon" %>
+     <% end %>
 
     <%= link_to user_path(current_user) do %>
       <%= image_tag "account-box.png", class:"icon" %>
     <% end %>
+
+    <%= button_to "Log out", destroy_user_session_path, method: :delete, data: {turbo: false} %>
  </div>
 </div>
