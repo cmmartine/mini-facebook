@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PostsController, type: :controller do
+RSpec.describe UsersController, type: :controller do
   login_user
 
   describe 'GET #index' do
@@ -10,10 +10,11 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe 'GET #new' do
+  describe 'GET #show' do
     it 'returns a 200 success response' do
-      get :new
+      get :show, params: { id: 1 }
       expect(response).to be_successful
     end
   end
+
 end
