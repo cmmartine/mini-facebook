@@ -4,4 +4,8 @@ class Post < ApplicationRecord
   has_many :likes
 
   validates :body, presence: true, length: { in: 1..1000 }
+
+  def liked?(user)
+    likes.find { |like| like.user_id == user.id }
+  end
 end

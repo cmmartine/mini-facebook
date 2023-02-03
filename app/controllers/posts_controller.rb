@@ -30,6 +30,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def like
+    @post = Post.all.find(params[:id])
+    Like.create(user_id: current_user.id, post_id: @post.id)
+    redirect_back fallback_location: root_path
+  end
+
   private
 
   def post_params

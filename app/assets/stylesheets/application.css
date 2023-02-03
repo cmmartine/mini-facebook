@@ -35,4 +35,14 @@
   height: 35px;
   width: 35px;
 }
- 
+
+.smaller-icon {
+  height: 20px;
+}
+
+.like-btn {
+  display: flex;
+  align-items: center;
+  padding-left: 3px;
+  padding-right: 3px;
+}
