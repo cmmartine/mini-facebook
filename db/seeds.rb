@@ -9,7 +9,10 @@ User.create!(username: 'Alfred', email: 'alfred@email.com', password: 'alfred1',
 
 User.create!(username: 'Becca', email: 'becca@email.com', password: 'becca1', password_confirmation: 'becca1')
 
-Post.create!(body: 'This is the first testing post for this app!', user_id: 1)
+Post.create!(body: 'This is the first testing post for this app!', user_id: 1, created_at: '2023-02-03 18:23:31 UTC')
+Post.create!(body: 'Y2k is a lie!', user_id: 2, created_at: '2000-01-01 00:00:00 UTC')
+Post.create!(body: 'Another post ', user_id: 2, created_at: '2043-06-13 11:12:13 UTC')
+Post.create!(body: "It's almost christmas!", user_id: 1, created_at: '2011-12-01 21:30:00 UTC')
 
 Comment.create!(body: 'This post is the best ever', user_id: 2, post_id: 1)
 

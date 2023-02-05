@@ -10,5 +10,23 @@
   <%= render "shared/navigation-bar" %>
 
   <h1>Timeline</h1>
+
+   <% sorted_posts = [] %>
+ <% current_user.friendships.each do |f| %>
+   <% friend = User.find_by(id: f.friend_id) %>
+   <% friend.posts.each do |post| %>
+     <% sorted_posts << post %>
+   <% end %>
+ <% end %>
+ <% current_user.posts.each do |post| %>
+   <% sorted_posts << post %>
+ <% end %>
+ <% sorted_posts.sort_by!{ |post| post.created_at } %>
+
+
+ <% sorted_posts.each do |post| %>
+   <div><%= post.body %>
+   <%= post.created_at %></div>
+ <% end %>
 </body>
 </html>
