@@ -11,21 +11,24 @@
 
   <h1><%=User.find(params[:id]).username%></h1>
 
-  <%= link_to 'Create a Post', new_post_path %>
-    <% if User.find(params[:id]).posts.any? %>
-      <% User.find(params[:id]).posts.each do |post| %>
-        <p class="user-page-post"><%= post.body %></p>
-        <p class="likes"><%= post.likes.count %> likes</p>
+  <turbo-frame id="new_post">
+    <%= link_to "Create a new post", new_post_path %>
+  </turbo-frame>
 
-        <% if  post.liked?(current_user) %>
-          <%= button_to like_path(post), method: "put", disabled: true do %>
-            <p class="like-btn"><%= image_tag "check.png", class:"smaller-icon" %>Liked</p>
-          <% end %>
-        <% else %>
-          <%= button_to like_path(post), method: "put" do %>
-            <p class="like-btn"><%= image_tag "thumb-up-outline.png", class:"smaller-icon" %>Like</p>
-          <% end %>
+  <% if User.find(params[:id]).posts.any? %>
+    <% User.find(params[:id]).posts.each do |post| %>
+      <p class="user-page-post"><%= post.body %></p>
+      <p class="likes"><%= post.likes.count %> likes</p>
+
+      <% if  post.liked?(current_user) %>
+        <%= button_to like_path(post), method: "put", disabled: true do %>
+          <p class="like-btn"><%= image_tag "check.png", class:"smaller-icon" %>Liked</p>
         <% end %>
+      <% else %>
+        <%= button_to like_path(post), method: "put" do %>
+          <p class="like-btn"><%= image_tag "thumb-up-outline.png", class:"smaller-icon" %>Like</p>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 </body>

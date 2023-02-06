@@ -10,6 +10,9 @@
   <%= render "shared/navigation-bar" %>
 
   <h1>Timeline</h1>
+  <turbo-frame id="new_post">
+    <%= link_to "Create a new post", new_post_path %>
+  </turbo-frame>
 
    <% sorted_posts = [] %>
  <% current_user.friendships.each do |f| %>
