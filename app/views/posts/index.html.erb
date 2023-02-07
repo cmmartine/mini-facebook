@@ -10,26 +10,40 @@
   <%= render "shared/navigation-bar" %>
 
   <h1>Timeline</h1>
+  <div>
   <turbo-frame id="new_post">
     <%= link_to "Create a new post", new_post_path %>
   </turbo-frame>
+  </div>
 
-   <% sorted_posts = [] %>
- <% current_user.friendships.each do |f| %>
-   <% friend = User.find_by(id: f.friend_id) %>
-   <% friend.posts.each do |post| %>
-     <% sorted_posts << post %>
-   <% end %>
- <% end %>
- <% current_user.posts.each do |post| %>
-   <% sorted_posts << post %>
- <% end %>
- <% sorted_posts.sort_by!{ |post| post.created_at } %>
+  <% sorted_posts = [] %>
+  <% current_user.friendships.each do |f| %>
+    <% friend = User.find_by(id: f.friend_id) %>
+    <% friend.posts.each do |post| %>
+      <% sorted_posts << post %>
+    <% end %>
+  <% end %>
+  <% current_user.posts.each do |post| %>
+    <% sorted_posts << post %>
+  <% end %>
+  <% sorted_posts.sort_by!{ |post| post.created_at } %>
 
 
- <% sorted_posts.each do |post| %>
-   <div><%= post.body %>
-   <%= post.created_at %></div>
- <% end %>
+  <% sorted_posts.reverse.each do |post| %>
+    <p class="user-page-post"><%= post.body %></p>
+    <p><%= User.find_by(id: post.user_id).username %></p>
+    <p><%= post.created_at %></p>
+    <p class="likes"><%= post.likes.count %> likes</p>
+
+    <% if  post.liked?(current_user) %>
+      <%= button_to like_path(post), method: "put", disabled: true do %>
+        <p class="like-btn"><%= image_tag "check.png", class:"smaller-icon" %>Liked</p>
+      <% end %>
+    <% else %>
+      <%= button_to like_path(post), method: "put" do %>
+        <p class="like-btn"><%= image_tag "thumb-up-outline.png", class:"smaller-icon" %>Like</p>
+      <% end %>
+    <% end %>
+  <% end %>
 </body>
 </html>

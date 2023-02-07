@@ -15,19 +15,26 @@
     <%= link_to "Create a new post", new_post_path %>
   </turbo-frame>
 
+  <% sorted_posts = [] %>
   <% if User.find(params[:id]).posts.any? %>
     <% User.find(params[:id]).posts.each do |post| %>
-      <p class="user-page-post"><%= post.body %></p>
-      <p class="likes"><%= post.likes.count %> likes</p>
+      <% sorted_posts << post %>
+    <% end %>
+  <% end %>
 
-      <% if  post.liked?(current_user) %>
-        <%= button_to like_path(post), method: "put", disabled: true do %>
-          <p class="like-btn"><%= image_tag "check.png", class:"smaller-icon" %>Liked</p>
-        <% end %>
-      <% else %>
-        <%= button_to like_path(post), method: "put" do %>
-          <p class="like-btn"><%= image_tag "thumb-up-outline.png", class:"smaller-icon" %>Like</p>
-        <% end %>
+  <% sorted_posts.reverse.each do |post| %>
+    <p class="user-page-post"><%= post.body %></p>
+    <p><%= User.find_by(id: post.user_id).username %></p>
+    <p><%= post.created_at %></p>
+    <p class="likes"><%= post.likes.count %> likes</p>
+
+    <% if  post.liked?(current_user) %>
+      <%= button_to like_path(post), method: "put", disabled: true do %>
+        <p class="like-btn"><%= image_tag "check.png", class:"smaller-icon" %>Liked</p>
+      <% end %>
+    <% else %>
+      <%= button_to like_path(post), method: "put" do %>
+        <p class="like-btn"><%= image_tag "thumb-up-outline.png", class:"smaller-icon" %>Like</p>
       <% end %>
     <% end %>
   <% end %>
