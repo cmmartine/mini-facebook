@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   put '/post/:id/like', to: 'posts#like', as: 'like'
+  put '/request/:id/accept', to: 'users#accept_request', as: 'accept_request'
 end

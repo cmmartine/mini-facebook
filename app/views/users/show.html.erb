@@ -9,7 +9,8 @@
 <body>
   <%= render "shared/navigation-bar" %>
 
-  <h1><%=User.find(params[:id]).username%></h1>
+  <% users_page = User.find(params[:id]) %>
+  <h1><%= users_page.username %></h1>
 
   <turbo-frame id="new_post">
     <%= link_to "Create a new post", new_post_path %>
@@ -47,6 +48,12 @@
         <p class="like-btn"><%= image_tag "thumb-up-outline.png", class:"smaller-icon" %>Like</p>
       <% end %>
     <% end %>
+  <% end %>
+
+  <h3>Friends:</h3>
+  <% users_page.friendships.each do |f| %>
+    <% friend = User.find_by(id: f.friend_id) %>
+    <%= link_to "#{friend.username}", user_path(friend.id) %>
   <% end %>
 </body>
 </html>

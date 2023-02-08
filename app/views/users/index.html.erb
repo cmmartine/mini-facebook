@@ -10,25 +10,33 @@
   <%= render "shared/navigation-bar" %>
 
   <h1>Notifications</h1>
+
+  <% already_friend = [] %>
+  <% current_user.friendships.each do |f| %>
+    <% friend = User.find_by(id: f.friend_id) %>
+    <% already_friend << friend.id %>
+  <% end %>
+
   <h3>Pending Received Requests:</h3>
-  <% if current_user.received_requests.any? %>
-    <% current_user.received_requests.each do |request| %>
+  <% current_user.received_requests.each do |request| %>
+    <% unless already_friend.include?(request.sending_user_id) %>
       <% user = User.find_by(id: request.sending_user_id) %>
       <%= link_to "#{user.username}", user_path(user.id) %>
+      <%= button_to "Accept", accept_request_path(request), method: "put" %>
     <% end %>
   <% end %>
 
   <h3>Pending Sent Requests:</h3>
-  <% if current_user.sent_requests.any? %>
-    <% current_user.sent_requests.each do |request| %>
+  <% current_user.sent_requests.each do |request| %>
+    <% unless already_friend.include?(request.receiving_user_id) %>
       <% user = User.find_by(id: request.receiving_user_id) %>
       <%= link_to "#{user.username}", user_path(user.id) %>
     <% end %>
   <% end %>
 
-  <h2>Users you may know:</h2>
+  <h3>Users you may know:</h3>
   <% User.all.each do |user| %>
-    <% if user != current_user %>
+    <% if user != current_user && !already_friend.include?(user.id) %>
       <%= link_to "#{user.username}", user_path(user.id) %>
     <% end %>
   <% end %>

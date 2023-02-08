@@ -20,7 +20,7 @@ Like.create!(user_id: 2, post_id: 1)
 
 Request.create!(receiving_user_id: 2, sending_user_id: 1)
 
-Friendship.create!(user_id: 1, friend_id: 2)
-Friendship.create!(user_id: 2, friend_id: 1)
+# Friendship.create!(user_id: 1, friend_id: 2)
+# Friendship.create!(user_id: 2, friend_id: 1)
 
 p 'Some database items created'
