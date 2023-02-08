@@ -1,4 +1,6 @@
-<%= form_with model: @post do |f| %>
-  <%= f.text_area :body, size: "60x5", class: "post-form" %>
-  <%= f.submit "Create Post" %>
-<% end %>
+<turbo-frame id="new_post" target="_top">
+  <%= form_with model: @post do |f| %>
+    <%= f.text_area :body, size: "60x5", class: "post-form" %>
+    <%= f.submit "Create Post" %>
+  <% end %>
+</turbo-frame>
