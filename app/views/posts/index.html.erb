@@ -35,6 +35,15 @@
     <p><%= post.created_at %></p>
     <p class="likes"><%= post.likes.count %> likes</p>
 
+    <p>Comments:</p>
+    <% post.comments.each do |comment| %>
+      <p><%= comment.body %></p>
+    <% end %>
+
+    <turbo-frame id="new_comment">
+      <%= link_to "Comment", new_post_comment_path(post) %>
+    </turbo-frame>
+
     <% if  post.liked?(current_user) %>
       <%= button_to like_path(post), method: "put", disabled: true do %>
         <p class="like-btn"><%= image_tag "check.png", class:"smaller-icon" %>Liked</p>

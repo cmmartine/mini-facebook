@@ -26,6 +26,16 @@
     <p class="user-page-post"><%= post.body %></p>
     <p><%= User.find_by(id: post.user_id).username %></p>
     <p><%= post.created_at %></p>
+
+    <p>Comments:</p>
+    <% post.comments.each do |comment| %>
+      <p><%= comment.body %></p>
+    <% end %>
+
+    <turbo-frame id="new_comment">
+      <%= link_to "Comment", new_post_comment_path(post) %>
+    </turbo-frame>
+
     <p class="likes"><%= post.likes.count %> likes</p>
 
     <% if  post.liked?(current_user) %>
