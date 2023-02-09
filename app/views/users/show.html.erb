@@ -12,6 +12,22 @@
   <% users_page = User.find(params[:id]) %>
   <h1><%= users_page.username %></h1>
 
+  <% if current_user.id == users_page.id %>
+
+  <% elsif current_user.friends?(current_user, users_page) %>
+    <p>You are friends with <%="#{users_page.username}"%>.</p>
+
+  <% elsif current_user.request_sent?(current_user, users_page) %>
+    <p>Friend request has been sent already.</p>
+
+  <% elsif current_user.request_received?(current_user, users_page) %>
+    <p>You have a pending friend request from <%="#{users_page.username}"%>.</p>
+
+  <% elsif !current_user.friendships.find_by(friend_id: users_page.id) %>
+    <%= button_to "Send #{users_page.username} a friend request!", send_request_path(users_page), method: "put" %>
+
+  <% end %>
+
   <turbo-frame id="new_post">
     <%= link_to "Create a new post", new_post_path %>
   </turbo-frame>
@@ -40,7 +56,7 @@
     <p class="likes"><%= post.likes.count %> likes</p>
 
     <% if  post.liked?(current_user) %>
-      <%= button_to like_path(post), method: "put", disabled: true do %>
+      <%= button_to unlike_path(post), method: :delete, data: { turbo_method: :delete } do %>
         <p class="like-btn"><%= image_tag "check.png", class:"smaller-icon" %>Liked</p>
       <% end %>
     <% else %>

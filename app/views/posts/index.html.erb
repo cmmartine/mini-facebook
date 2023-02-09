@@ -45,7 +45,7 @@
     </turbo-frame>
 
     <% if  post.liked?(current_user) %>
-      <%= button_to like_path(post), method: "put", disabled: true do %>
+      <%= button_to unlike_path(post), method: :delete, data: { turbo_method: :delete } do %>
         <p class="like-btn"><%= image_tag "check.png", class:"smaller-icon" %>Liked</p>
       <% end %>
     <% else %>

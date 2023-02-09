@@ -12,4 +12,16 @@ class User < ApplicationRecord
   has_many :received_requests, class_name: :Request, foreign_key: :receiving_user_id
 
   validates :username, presence: true
+
+  def request_sent?(current_user, other_user)
+    sent_requests.find_by(sending_user_id: current_user.id, receiving_user_id: other_user.id)
+  end
+
+  def request_received?(current_user, other_user)
+    received_requests.find_by(sending_user_id: other_user.id, receiving_user_id: current_user.id)
+  end
+
+  def friends?(current_user, other_user)
+    friendships.find_by(user_id: current_user.id, friend_id: other_user.id)
+  end
 end

@@ -23,6 +23,7 @@
       <% user = User.find_by(id: request.sending_user_id) %>
       <%= link_to "#{user.username}", user_path(user.id) %>
       <%= button_to "Accept", accept_request_path(request), method: "put" %>
+      <%= button_to "Deny", deny_request_path(request), method: :delete, data: { turbo_method: :delete }%>
     <% end %>
   <% end %>
 
@@ -37,7 +38,17 @@
   <h3>Users you may know:</h3>
   <% User.all.each do |user| %>
     <% if user != current_user && !already_friend.include?(user.id) %>
-      <%= link_to "#{user.username}", user_path(user.id) %>
+     <%= link_to "#{user.username}", user_path(user.id) %>
+
+      <% if current_user.request_sent?(current_user, user) %>
+        <p>Friend request has been sent to <%="#{user.username}"%> already.</p>
+
+      <% elsif current_user.request_received?(current_user, user) %>
+        <p>You have a pending friend request from <%="#{user.username}"%>.</p>
+
+      <% else %>
+        <%= button_to "Send #{user.username} a friend request!", send_request_path(user), method: "put" %>
+      <% end %>
     <% end %>
   <% end %>
 </body>
