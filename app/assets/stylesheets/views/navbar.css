@@ -1,0 +1,23 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: rgb(104, 207, 238);
+  height: 55px;
+}
+
+.nav-icon-container {
+  display: flex;
+  align-items: center;
+}
+ 
+.nav-button {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  margin-left: 15px;
+  margin-right: 6px;
+  padding: 2px 4px;
+}

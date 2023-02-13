@@ -1,0 +1,12 @@
+.content-wrapper {
+  max-width: 960px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+ 
+.page-header {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+ 

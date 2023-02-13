@@ -1,0 +1,10 @@
+.like-btn {
+  display: flex;
+  align-items: center;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.like-icon {
+  height: 20px;
+}

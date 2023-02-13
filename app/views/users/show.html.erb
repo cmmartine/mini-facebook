@@ -7,69 +7,72 @@
   <title>Profile</title>
 </head>
 <body>
-  <%= render "shared/navigation-bar" %>
+  <div class="content-wrapper">
+    <%= render "shared/navigation-bar" %>
 
-  <% users_page = User.find(params[:id]) %>
-  <h1><%= users_page.username %></h1>
+    <% users_page = User.find(params[:id]) %>
+    <h1 class="page-header"><%= users_page.username %></h1>
 
-  <% if current_user.id == users_page.id %>
+    <% if current_user.id == users_page.id %>
 
-  <% elsif current_user.friends?(current_user, users_page) %>
-    <p>You are friends with <%="#{users_page.username}"%>.</p>
+    <% elsif current_user.friends?(current_user, users_page) %>
+      <p>You are friends with <%="#{users_page.username}"%>.</p>
 
-  <% elsif current_user.request_sent?(current_user, users_page) %>
-    <p>Friend request has been sent already.</p>
+    <% elsif current_user.request_sent?(current_user, users_page) %>
+      <p>Friend request has been sent already.</p>
 
-  <% elsif current_user.request_received?(current_user, users_page) %>
-    <p>You have a pending friend request from <%="#{users_page.username}"%>.</p>
+    <% elsif current_user.request_received?(current_user, users_page) %>
+      <p>You have a pending friend request from <%="#{users_page.username}"%>.</p>
 
-  <% elsif !current_user.friendships.find_by(friend_id: users_page.id) %>
-    <%= button_to "Send #{users_page.username} a friend request!", send_request_path(users_page), method: "put" %>
+    <% elsif !current_user.friendships.find_by(friend_id: users_page.id) %>
+      <%= button_to "Send #{users_page.username} a friend request!", send_request_path(users_page), method: "put" %>
 
-  <% end %>
-
-  <turbo-frame id="new_post">
-    <%= link_to "Create a new post", new_post_path %>
-  </turbo-frame>
-
-  <% sorted_posts = [] %>
-  <% if User.find(params[:id]).posts.any? %>
-    <% User.find(params[:id]).posts.each do |post| %>
-      <% sorted_posts << post %>
-    <% end %>
-  <% end %>
-
-  <% sorted_posts.reverse.each do |post| %>
-    <p class="user-page-post"><%= post.body %></p>
-    <p><%= User.find_by(id: post.user_id).username %></p>
-    <p><%= post.created_at %></p>
-
-    <p>Comments:</p>
-    <% post.comments.each do |comment| %>
-      <p><%= comment.body %></p>
     <% end %>
 
-    <turbo-frame id="new_comment">
-      <%= link_to "Comment", new_post_comment_path(post) %>
+    <turbo-frame id="new_post">
+      <%= link_to "Create a new post", new_post_path %>
     </turbo-frame>
 
-    <p class="likes"><%= post.likes.count %> likes</p>
-
-    <% if  post.liked?(current_user) %>
-      <%= button_to unlike_path(post), method: :delete, data: { turbo_method: :delete } do %>
-        <p class="like-btn"><%= image_tag "check.png", class:"smaller-icon" %>Liked</p>
-      <% end %>
-    <% else %>
-      <%= button_to like_path(post), method: "put" do %>
-        <p class="like-btn"><%= image_tag "thumb-up-outline.png", class:"smaller-icon" %>Like</p>
+    <% sorted_posts = [] %>
+    <% if User.find(params[:id]).posts.any? %>
+      <% User.find(params[:id]).posts.each do |post| %>
+        <% sorted_posts << post %>
       <% end %>
     <% end %>
-  <% end %>
 
-  <h3>Friends:</h3>
-  <% users_page.friendships.each do |f| %>
-    <% friend = User.find_by(id: f.friend_id) %>
-    <%= link_to "#{friend.username}", user_path(friend.id) %>
-  <% end %>
+    <div class ="post-container">
+      <% sorted_posts.reverse.each do |post| %>
+        <p class="post-body"><%= post.body %></p>
+        <p class="post-username"><%= User.find_by(id: post.user_id).username %></p>
+        <p class="post-time"><%= post.created_at %></p>
+        <p class="post-likes"><%= post.likes.count %> likes</p>
+
+        <% if  post.liked?(current_user) %>
+          <%= button_to unlike_path(post), method: :delete, data: { turbo_method: :delete } do %>
+            <p class="like-btn"><%= image_tag "check.png", class:"like-icon" %>Liked</p>
+          <% end %>
+        <% else %>
+          <%= button_to like_path(post), method: "put" do %>
+            <p class="like-btn"><%= image_tag "thumb-up-outline.png", class:"like-icon" %>Like</p>
+          <% end %>
+        <% end %>
+
+        <p>Comments:</p>
+        <% post.comments.each do |comment| %>
+          <p><%= comment.body %></p>
+        <% end %>
+
+        <turbo-frame id="new_comment">
+          <%= link_to "Comment", new_post_comment_path(post) %>
+        </turbo-frame>
+      <% end %>
+    </div>
+
+    <h3>Friends:</h3>
+    <% users_page.friendships.each do |f| %>
+      <% friend = User.find_by(id: f.friend_id) %>
+      <%= link_to "#{friend.username}", user_path(friend.id) %>
+    <% end %>
+  </div>
 </body>
 </html>
