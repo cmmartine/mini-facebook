@@ -1,0 +1,21 @@
+.friend-container {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgb(172, 171, 171);
+  box-shadow: 8px 5px 5px lightgrey;
+  border-radius: 5px;
+  margin: 10px 0px;
+  padding: 10px;
+}
+
+.friend-header {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.friend-list {
+  margin-bottom: 5px;
+}

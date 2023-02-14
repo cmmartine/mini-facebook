@@ -9,4 +9,15 @@
   margin-top: 15px;
   margin-bottom: 15px;
 }
- 
+
+.notice {
+  max-width: 960px;
+  margin: auto;
+  background-color: rgb(104, 207, 238);
+}
+
+.alert {
+  max-width: 960px;
+  margin: auto;
+  background-color: rgb(104, 207, 238);
+}

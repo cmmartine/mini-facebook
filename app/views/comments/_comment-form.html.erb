@@ -1,6 +1,6 @@
 <turbo-frame id="new_comment" target="_top">
   <%= form_with model: [@post, @comment], local: true do |f| %>
-    <%= f.text_area :body, size: "50x3", class: "comment-form", autofocus: true %>
+    <%= f.text_area :body, size: "35x5", class: "text-form", autofocus: true %>
     <%= f.submit "Submit comment" %>
     <%= f.hidden_field :user_id, value: current_user.id %>
   <% end %>

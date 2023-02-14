@@ -1,21 +1,19 @@
-<nav>
-  <div class="navbar">
-    <h2>Mini-Facebook</h2>
+<div class="navbar">
+  <h2>Mini-Facebook</h2>
     
-    <div class="nav-icon-container">
-      <%= link_to root_path do %>
-        <%= image_tag "earth.png", class:"nav-icon" %>
-      <% end %>
+  <div class="nav-icon-container">
+    <%= link_to root_path do %>
+      <%= image_tag "earth.png", class:"nav-icon" %>
+    <% end %>
 
-      <%= link_to users_path do %>
+    <%= link_to users_path do %>
       <%= image_tag "account-multiple.png", class:"nav-icon" %>
-      <% end %>
+    <% end %>
 
-      <%= link_to user_path(current_user) do %>
-        <%= image_tag "account-box.png", class:"nav-icon" %>
-      <% end %>
+    <%= link_to user_path(current_user) do %>
+      <%= image_tag "account-box.png", class:"nav-icon" %>
+    <% end %>
 
-      <%= button_to "Log out", destroy_user_session_path, method: :delete, data: {turbo: false}, class: "nav-button" %>
-    </div>
+    <%= button_to "Log out", destroy_user_session_path, method: :delete, data: {turbo: false}, class: "nav-button" %>
   </div>
-</nav>
+</div>

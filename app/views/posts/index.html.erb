@@ -8,12 +8,12 @@
 </head>
 <body>
   <div class="content-wrapper">
-    <%= render "shared/navigation-bar" %>
+    <nav class="nav-page"><%= render "shared/navigation-bar" %></nav>
 
     <h1 class="page-header">Timeline</h1>
-    <div>
+    <div class="post-link-container">
     <turbo-frame id="new_post">
-      <%= link_to "Create a new post", new_post_path %>
+      <%= link_to "Create a new post", new_post_path, class: "post-link" %>
     </turbo-frame>
     </div>
 
@@ -29,33 +29,37 @@
     <% end %>
     <% sorted_posts.sort_by!{ |post| post.created_at } %>
 
-    <div class ="post-container">
       <% sorted_posts.reverse.each do |post| %>
-        <p class="post-body"><%= post.body %></p>
-        <p class="post-username"><%= User.find_by(id: post.user_id).username %></p>
-        <p class="post-time"><%= post.created_at %></p>
-        <p class="post-likes"><%= post.likes.count %> likes</p>
+        <div class="post-container">
+          <p class="post-body"><%= post.body %></p>
+          <% user = User.find_by(id: post.user_id) %>
+          <p class="profile-link-post"><%= link_to "#{user.username}", user_path(user.id), class: "profile-link" %></p>
+          <p class="post-time"><%= post.created_at %></p>
+          <p class="post-likes"><%= post.likes.count %> likes</p>
 
-        <% if  post.liked?(current_user) %>
-          <%= button_to unlike_path(post), method: :delete, data: { turbo_method: :delete } do %>
-            <p class="like-btn"><%= image_tag "check.png", class:"like-icon" %>Liked</p>
+          <% if  post.liked?(current_user) %>
+            <%= button_to unlike_path(post), method: :delete, data: { turbo_method: :delete } do %>
+              <p class="like-btn"><%= image_tag "check.png", class:"like-icon" %>Liked</p>
+            <% end %>
+          <% else %>
+            <%= button_to like_path(post), method: "put" do %>
+              <p class="like-btn"><%= image_tag "thumb-up-outline.png", class:"like-icon" %>Like</p>
+            <% end %>
           <% end %>
-        <% else %>
-          <%= button_to like_path(post), method: "put" do %>
-            <p class="like-btn"><%= image_tag "thumb-up-outline.png", class:"like-icon" %>Like</p>
-          <% end %>
-        <% end %>
 
-        <p>Comments:</p>
-        <% post.comments.each do |comment| %>
-          <p><%= comment.body %></p>
-        <% end %>
-
-        <turbo-frame id="new_comment">
-          <%= link_to "Comment", new_post_comment_path(post) %>
-        </turbo-frame>
+          <p class="comment-header">Comments:</p>
+          <turbo-frame id="new_comment", class="comment-link-container">
+            <%= link_to "Comment", new_post_comment_path(post), class: "comment-link" %>
+          </turbo-frame>
+          <div class="comment-content-container">
+            <% post.comments.each do |comment| %>
+              <p class="comment-body"><%= comment.body %></p>
+              <% comment_user = User.find_by(id: comment.user_id)%>
+              <p class="comment-user">- <%= link_to "#{comment_user.username}", user_path(comment_user.id), class: "profile-link" %></p>
+            <% end %>
+          </div>
+        </div>
       <% end %>
-    </div>
   </div>
 </body>
 </html>

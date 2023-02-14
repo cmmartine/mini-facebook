@@ -1,0 +1,21 @@
+.comment-header {
+  grid-row: 4;
+  grid-column: 1;
+  margin-top: 20px;
+}
+
+.comment-content-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-body {
+  grid-row: 6;
+  margin-top: 10px;
+}
+
+.comment-user {
+  grid-row: 7;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}

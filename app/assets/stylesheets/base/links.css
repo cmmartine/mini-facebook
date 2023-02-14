@@ -1,7 +1,52 @@
-.nav-icon {
-  height: 35px;
-  width: 35px;
-  margin-left: 6px;
-  margin-right: 6px;
+.post-link-container {
+  align-self: center;
+  width: 50%;
 }
- 
+
+.post-link {
+  color: rgb(0, 0, 0);
+}
+
+.post-link:visited {
+  color: rgb(0, 0, 0);
+}
+
+.post-link:hover {
+  background-color: rgb(104, 207, 238);
+}
+
+.comment-link-container {
+  grid-row: 4;
+  grid-column: 2;
+  margin-top: 20px;
+}
+
+.comment-link {
+  color: rgb(0, 0, 0);
+}
+
+.comment-link:visited {
+  color: rgb(0, 0, 0);
+}
+
+.comment-link:hover {
+  background-color: rgb(104, 207, 238);
+}
+
+.profile-link {
+  color: rgb(0, 0, 0);
+  width: max-content;
+}
+
+.profile-link:visited {
+  color: rgb(0, 0, 0);
+}
+
+.profile-link:hover {
+  color: rgb(110, 110, 110);
+}
+
+.profile-link-post {
+  grid-column: 2;
+  grid-row: 2;
+}
