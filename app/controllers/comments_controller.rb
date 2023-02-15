@@ -12,7 +12,8 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_back fallback_location: root_path
     else
-      render :new, status: :unprocessable_entity
+      flash[:notice] = 'Failed to create comment, length has to be between 1 and 500 characters'
+      redirect_back fallback_location: root_path
     end
   end
 

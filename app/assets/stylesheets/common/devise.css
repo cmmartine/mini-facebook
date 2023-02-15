@@ -1,16 +1,29 @@
+.devise-wrapper {
+  min-width: 920px;
+  width: 100%;
+  max-width: 1920px;
+  min-height: 100vh;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgb(235, 235, 235);
+}
+
 .devise-container {
   display: flex;
   flex-direction: column;
-  align-self: center;
   align-items: center;
-  width: 50%;
+  width: 30%;
+  height: fit-content;
+  background-color: white;
   border-style: solid;
   border-width: 2px;
   border-color: rgb(172, 171, 171);
   box-shadow: 8px 5px 5px lightgrey;
   border-radius: 5px;
-  margin: 10px 0px;
-  padding: 10px;
+  margin-top: 10px;
+  padding: 10px 25px;
 }
 
 .field {

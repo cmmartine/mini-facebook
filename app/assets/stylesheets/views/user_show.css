@@ -1,21 +1,31 @@
-.friend-container {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
+.friend-profile-container {
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  grid-template-rows: repeat(3, auto);
+  min-width: 40%;
+  width: 260px;
+  background-color: white;
   border-style: solid;
   border-width: 2px;
   border-color: rgb(172, 171, 171);
   box-shadow: 8px 5px 5px lightgrey;
   border-radius: 5px;
   margin: 10px 0px;
-  padding: 10px;
+  padding: 5px;
 }
 
-.friend-header {
+.friend-profile-header {
   margin-top: 5px;
   margin-bottom: 10px;
+  grid-row: 1;
 }
 
 .friend-list {
   margin-bottom: 5px;
+  grid-row: 2 / 4;
+}
+
+.profile-info {
+  margin-bottom: 10px;
+  grid-row: 2;
 }

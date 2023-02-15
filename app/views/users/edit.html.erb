@@ -1,0 +1,6 @@
+<turbo-frame id="profile_info" target="_top">
+  <%= form_with model: @user, data: { turbo: false } do |f| %>
+    <%= f.text_area :profile_information, size: "20x8", class: "text-form", autofocus: true %>
+    <%= f.submit "Submit", class: "post-comment-submit"%>
+  <% end %>
+</turbo-frame>

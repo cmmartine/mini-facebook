@@ -7,10 +7,13 @@
   <title>Notifications</title>
 </head>
 <body>
-  <div class="content-wrapper">
-    <nav class="nav-page"><%= render "shared/navigation-bar" %></nav>
+  <nav class="nav-page"><%= render "shared/navigation-bar" %></nav>
 
-    <h1 class="page-header">Notifications</h1>
+  <div class="content-wrapper">
+    
+    <div class="content-wrapper-left">
+      <h1 class="page-header">Notifications</h1>
+    </div>
 
     <% already_friend = [] %>
     <% current_user.friendships.each do |f| %>
@@ -18,54 +21,59 @@
       <% already_friend << friend.id %>
     <% end %>
     
-    <div class="request-wrapper">
-      <div class="request-content">
-        <h3 class="request-header">Pending Received Requests:</h3>
-        <% current_user.received_requests.each do |request| %>
-          <% unless already_friend.include?(request.sending_user_id) %>
-            <div class="request-received-may-know">
-              <% user = User.find_by(id: request.sending_user_id) %>
-              <%= link_to "#{user.username}", user_path(user.id), class: "profile-link" %>
-              <div class="received-buttons">
-                <%= button_to "Accept", accept_request_path(request), method: "put", class: "notification-btn" %>
-                <%= button_to "Deny", deny_request_path(request), method: :delete, data: { turbo_method: :delete }, class: "notification-btn"%>
+    <div class="content-wrapper-right">
+      <div class="request-wrapper">
+        <div class="request-content">
+          <h3 class="request-header">Pending Received Requests:</h3>
+          <% current_user.received_requests.each do |request| %>
+            <% unless already_friend.include?(request.sending_user_id) %>
+              <div class="request-received-may-know">
+                <% user = User.find_by(id: request.sending_user_id) %>
+                <%= link_to "#{user.username}", user_path(user.id), class: "profile-link" %>
+                <div class="received-buttons">
+                  <%= button_to "Accept", accept_request_path(request), method: "put", class: "notification-btn" %>
+                  <%= button_to "Deny", deny_request_path(request), method: :delete, data: { turbo_method: :delete }, class: "notification-btn"%>
+                </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-      
-      <div class="request-content">
-        <h3 class="request-header">Pending Sent Requests:</h3>
-        <% current_user.sent_requests.each do |request| %>
-          <% unless already_friend.include?(request.receiving_user_id) %>
-            <div class="request-sent">
-              <% user = User.find_by(id: request.receiving_user_id) %>
-              <%= link_to "#{user.username}", user_path(user.id), class: "profile-link" %>
-            </div>
+        </div>
+        
+        <div class="request-content">
+          <h3 class="request-header">Pending Sent Requests:</h3>
+          <% current_user.sent_requests.each do |request| %>
+            <% unless already_friend.include?(request.receiving_user_id) %>
+              <div class="request-sent">
+                <% user = User.find_by(id: request.receiving_user_id) %>
+                <%= link_to "#{user.username}", user_path(user.id), class: "profile-link" %>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
 
-      <div class="request-content">
-        <h3 class="request-header">Users you may know:</h3>
-        <% User.all.each do |user| %>
-          <% if user != current_user && !already_friend.include?(user.id) %>
-            <div class="request-received-may-know">
-              <%= link_to "#{user.username}", user_path(user.id), class: "profile-link" %>
+        <div class="request-content">
+          <h3 class="request-header">Users you may know:</h3>
+          <% User.all.each do |user| %>
+            <% if user != current_user && !already_friend.include?(user.id) %>
+              <div class="request-received-may-know">
+                <div class="may-know-link-container">
+                  <%= link_to "#{user.username}", user_path(user.id), class: "profile-link" %>
+                </div>
+                <div>
+                  <% if current_user.request_sent?(current_user, user) %>
+                    <p>Friend request has been sent to <%="#{user.username}" %> already.</p>
 
-              <% if current_user.request_sent?(current_user, user) %>
-                <p>Friend request has been sent to <%="#{user.username}" %> already.</p>
+                  <% elsif current_user.request_received?(current_user, user) %>
+                  <p>You have a pending friend request from <%="#{user.username}"%>.</p>
 
-              <% elsif current_user.request_received?(current_user, user) %>
-              <p>You have a pending friend request from <%="#{user.username}"%>.</p>
-
-              <% else %>
-                <%= button_to "Send #{user.username} a friend request!", send_request_path(user), method: "put", class: "notification-btn" %>
-              <% end %>
-            </div>
+                  <% else %>
+                    <%= button_to "Send a friend request!", send_request_path(user), method: "put", class: "notification-btn" %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>

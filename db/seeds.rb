@@ -5,9 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-User.create!(username: 'Alfred', email: 'alfred@email.com', password: 'alfred1', password_confirmation: 'alfred1', confirmed_at: '2011-12-01 11:30:45 UTC', confirmation_sent_at: '2011-12-01 11:30:46 UTC')
+User.create!(username: 'Alfred', email: 'alfred@email.com', password: 'alfred1', password_confirmation: 'alfred1', confirmed_at: '2011-12-01 11:30:45 UTC', confirmation_sent_at: '2011-12-01 11:30:46 UTC', profile_information: "Master Wayne is definitely not Batman.")
 
-User.create!(username: 'Becca', email: 'becca@email.com', password: 'becca1', password_confirmation: 'becca1', confirmed_at: '1999-12-29 13:01:23 UTC', confirmation_sent_at: '1999-12-29 13:01:24 UTC')
+User.create!(username: 'Becca', email: 'becca@email.com', password: 'becca1', password_confirmation: 'becca1', confirmed_at: '1999-12-29 13:01:23 UTC', confirmation_sent_at: '1999-12-29 13:01:24 UTC', profile_information: "Just a Becca girl living in a not Becca world.")
 
 Post.create!(body: 'This is the first testing post for this app!', user_id: 1, created_at: '2023-02-03 18:23:31 UTC')
 Post.create!(body: 'Y2k is a lie!', user_id: 2, created_at: '2000-01-01 00:00:00 UTC')

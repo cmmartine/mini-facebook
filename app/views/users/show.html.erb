@@ -7,39 +7,48 @@
   <title>Profile</title>
 </head>
 <body>
+  <nav class="nav-page"><%= render "shared/navigation-bar" %></nav>
+
   <div class="content-wrapper">
-    <nav class="nav-page"><%= render "shared/navigation-bar" %></nav>
+  
+    <div class="content-wrapper-left">
+      <% users_page = User.find(params[:id]) %>
+      <h1 class="page-header"><%= users_page.username %></h1>
 
-    <% users_page = User.find(params[:id]) %>
-    <h1 class="page-header"><%= users_page.username %></h1>
-
-    <% if current_user.id == users_page.id %>
-      <div class="post-link-container">
-        <turbo-frame id="new_post">
-          <%= link_to "Create a new post", new_post_path, class: "post-link" %>
-        </turbo-frame>
+      <div class="friend-profile-container">
+        <h3 class="friend-profile-header"><%= "About #{users_page.username}"%></h3>
+        <p class="profile-info"><%= users_page.profile_information %></p>
+        <% if current_user.id == users_page.id %>
+          <turbo-frame id="profile_info">
+            <%= link_to "Edit", edit_user_path, class: "edit-profile-link" %>
+          </turbo-frame>
+        <% end %>
       </div>
 
-    <% elsif current_user.friends?(current_user, users_page) %>
-      <p>You are friends with <%="#{users_page.username}"%>.</p>
+      <div class="friend-profile-container">
+        <h3 class="friend-profile-header">Friends:</h3>
+        <% users_page.friendships.each do |f| %>
+          <div class="friend-list">
+            <% friend = User.find_by(id: f.friend_id) %>
+            <%= link_to "#{friend.username}", user_path(friend.id), class: "profile-link" %>
+          </div>
+        <% end %>
+      </div>
 
-    <% elsif current_user.request_sent?(current_user, users_page) %>
-      <p>Friend request has been sent already.</p>
+      <% if current_user.id == users_page.id %>
 
-    <% elsif current_user.request_received?(current_user, users_page) %>
-      <p>You have a pending friend request from <%="#{users_page.username}"%>.</p>
+      <% elsif current_user.friends?(current_user, users_page) %>
+        <p>You are friends with <%="#{users_page.username}"%>.</p>
 
-    <% elsif !current_user.friendships.find_by(friend_id: users_page.id) %>
-      <%= button_to "Send #{users_page.username} a friend request!", send_request_path(users_page), method: "put" %>
+      <% elsif current_user.request_sent?(current_user, users_page) %>
+        <p>Friend request has been sent already.</p>
 
-    <% end %>
-    <div class="friend-container">
-      <h3 class="friend-header">Friends:</h3>
-      <% users_page.friendships.each do |f| %>
-        <div class="friend-list">
-          <% friend = User.find_by(id: f.friend_id) %>
-          <%= link_to "#{friend.username}", user_path(friend.id), class: "profile-link" %>
-        </div>
+      <% elsif current_user.request_received?(current_user, users_page) %>
+        <p>You have a pending friend request from <%="#{users_page.username}"%>.</p>
+
+      <% elsif !current_user.friendships.find_by(friend_id: users_page.id) %>
+        <%= button_to "Send a friend request!", send_request_path(users_page), method: "put" %>
+
       <% end %>
     </div>
 
@@ -49,6 +58,16 @@
         <% sorted_posts << post %>
       <% end %>
     <% end %>
+    
+    <div class="content-wrapper-right">
+    
+      <% if current_user.id == users_page.id %>
+        <div class="post-link-container">
+          <turbo-frame id="new_post">
+            <%= link_to "Create a new post", new_post_path, class: "post-link" %>
+          </turbo-frame>
+        </div>
+      <% end %>
 
       <% sorted_posts.reverse.each do |post| %>
         <div class ="post-container">
@@ -80,6 +99,7 @@
           </div>
         </div>
       <% end %>
+    </div>
   </div>
 </body>
 </html>

@@ -7,14 +7,12 @@
   <title>Timeline</title>
 </head>
 <body>
-  <div class="content-wrapper">
-    <nav class="nav-page"><%= render "shared/navigation-bar" %></nav>
+  <nav class="nav-page"><%= render "shared/navigation-bar" %></nav>
 
-    <h1 class="page-header">Timeline</h1>
-    <div class="post-link-container">
-    <turbo-frame id="new_post">
-      <%= link_to "Create a new post", new_post_path, class: "post-link" %>
-    </turbo-frame>
+  <div class="content-wrapper">
+
+    <div class="content-wrapper-left">
+      <h1 class="page-header">Timeline</h1>
     </div>
 
     <% sorted_posts = [] %>
@@ -28,6 +26,14 @@
       <% sorted_posts << post %>
     <% end %>
     <% sorted_posts.sort_by!{ |post| post.created_at } %>
+
+    <div class="content-wrapper-right">
+
+      <div class="post-link-container">
+        <turbo-frame id="new_post">
+          <%= link_to "Create a new post", new_post_path, class: "post-link" %>
+        </turbo-frame>
+      </div>
 
       <% sorted_posts.reverse.each do |post| %>
         <div class="post-container">
@@ -60,6 +66,7 @@
           </div>
         </div>
       <% end %>
+    </div>
   </div>
 </body>
 </html>

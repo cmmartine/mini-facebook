@@ -1,4 +1,8 @@
 .nav-page {
+  min-width: 920px;
+  width: 100%;
+  max-width: 1920px;
+  margin: auto;
   position: sticky;
   top: 0px;
 }

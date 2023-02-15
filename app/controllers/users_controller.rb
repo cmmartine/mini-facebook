@@ -9,6 +9,22 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      flash[:notice] = 'Profile Information updated'
+    else
+      flash[:notice] = 'Unable to update Profile Information, please try again'
+    end
+
+    redirect_back fallback_location: root_path
+  end
+
   def send_request
     @user = User.all.find(params[:id])
     @request = Request.create(sending_user_id: current_user.id, receiving_user_id: @user.id)
@@ -45,5 +61,11 @@ class UsersController < ApplicationController
       flash[:notice] = 'Request deny failed, please try again.'
     end
     redirect_back fallback_location: users_path
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:profile_information)
   end
 end

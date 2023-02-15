@@ -15,7 +15,8 @@ class PostsController < ApplicationController
     if @post.save
       redirect_back fallback_location: root_path
     else
-      render :new, status: :unprocessable_entity
+      flash[:notice] = 'Failed to create post, length has to be between 1 and 1000 characters'
+      redirect_back fallback_location: root_path
     end
   end
 

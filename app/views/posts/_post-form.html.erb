@@ -1,6 +1,6 @@
 <turbo-frame id="new_post" target="_top">
   <%= form_with model: @post do |f| %>
-    <%= f.text_area :body, size: "58x5", class: "text-form", autofocus: true %>
-    <%= f.submit "Create Post" %>
+    <%= f.text_area :body, size: "46x5", class: "text-form", autofocus: true %>
+    <%= f.submit "Create Post", class: "post-comment-submit" %>
   <% end %>
 </turbo-frame>

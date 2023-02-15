@@ -1,6 +1,8 @@
 .post-link-container {
+  display: flex;
   align-self: center;
-  width: 50%;
+  width: 100%;
+  margin-top: 50px;
 }
 
 .post-link {
@@ -36,6 +38,7 @@
 .profile-link {
   color: rgb(0, 0, 0);
   width: max-content;
+  text-decoration: none;
 }
 
 .profile-link:visited {
@@ -44,9 +47,24 @@
 
 .profile-link:hover {
   color: rgb(110, 110, 110);
+  text-decoration: underline;
 }
 
 .profile-link-post {
   grid-column: 2;
   grid-row: 2;
+}
+
+.edit-profile-link {
+  color: rgb(0, 0, 0);
+  width: max-content;
+  grid-row: 3;
+}
+
+.edit-profile-link:visited {
+  color: rgb(0, 0, 0);
+}
+
+.edit-profile-link:hover {
+  background-color: rgb(104, 207, 238);
 }
