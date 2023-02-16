@@ -3,7 +3,7 @@
   grid-template-columns: repeat(1, auto);
   grid-template-rows: repeat(3, auto);
   min-width: 40%;
-  width: 260px;
+  width: fit-content;
   background-color: white;
   border-style: solid;
   border-width: 2px;
@@ -28,4 +28,13 @@
 .profile-info {
   margin-bottom: 10px;
   grid-row: 2;
+}
+
+.name-avatar-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar-icon {
+  width: 80px;
 }

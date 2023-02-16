@@ -1,4 +1,4 @@
-<nav class="nav-page"><%= render "devise/shared/banner" %></nav>
+<nav class="nav-page"><%= render "shared/navigation-bar" %></nav>
 
 <div class="devise-wrapper">
   <div class="devise-container">
@@ -6,6 +6,12 @@
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: { turbo: false }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div>
+        <%= image_tag user_avatar(current_user, 120), class: "nav-icon" %>
+        <p>We use gravatar for you avatar, to change it, please follow this link:</p>
+        <a href="https://en.gravatar.com/">Gravatar website</a>
+      </div>
 
       <div class="field">
         <%= f.label :username %><br />

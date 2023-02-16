@@ -45,3 +45,8 @@
 .nav-icon:hover {
   background-color: rgb(44, 189, 233);
 }
+
+.nav-text {
+  padding-left: 1px;
+  padding-right: 10px;
+}

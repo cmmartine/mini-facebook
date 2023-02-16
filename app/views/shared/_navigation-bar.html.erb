@@ -3,17 +3,20 @@
     
   <div class="nav-icon-container">
     <%= link_to root_path do %>
-      <%= image_tag "earth.png", class:"nav-icon" %>
+      <%= image_tag "earth.png", class:"nav-icon", alt: "timeline" %>
     <% end %>
 
     <%= link_to users_path do %>
-      <%= image_tag "account-multiple.png", class:"nav-icon" %>
+      <%= image_tag "account-multiple.png", class:"nav-icon", alt: "friend requests" %>
     <% end %>
 
     <%= link_to user_path(current_user) do %>
-      <%= image_tag "account-box.png", class:"nav-icon" %>
+      <%= image_tag user_avatar(current_user), class: "nav-icon", alt: "your profile" %>
     <% end %>
+    <p class="nav-text"><%= current_user.username %></p>
 
+    <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
+      
     <%= button_to "Log out", destroy_user_session_path, method: :delete, data: {turbo: false}, class: "nav-button" %>
   </div>
 </div>

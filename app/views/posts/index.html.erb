@@ -27,13 +27,13 @@
     <% end %>
     <% sorted_posts.sort_by!{ |post| post.created_at } %>
 
-    <div class="content-wrapper-right">
+    <main class="content-wrapper-right">
 
-      <div class="post-link-container">
+      <form class="post-link-container">
         <turbo-frame id="new_post">
           <%= link_to "Create a new post", new_post_path, class: "post-link" %>
         </turbo-frame>
-      </div>
+      </form>
 
       <% sorted_posts.reverse.each do |post| %>
         <div class="post-container">
@@ -54,9 +54,11 @@
           <% end %>
 
           <p class="comment-header">Comments:</p>
-          <turbo-frame id="new_comment", class="comment-link-container">
-            <%= link_to "Comment", new_post_comment_path(post), class: "comment-link" %>
-          </turbo-frame>
+          <form>
+            <turbo-frame id="new_comment", class="comment-link-container">
+              <%= link_to "Comment", new_post_comment_path(post), class: "comment-link" %>
+            </turbo-frame>
+          </form>
           <div class="comment-content-container">
             <% post.comments.each do |comment| %>
               <p class="comment-body"><%= comment.body %></p>
@@ -66,7 +68,7 @@
           </div>
         </div>
       <% end %>
-    </div>
+    </main>
   </div>
 </body>
 </html>

@@ -68,3 +68,15 @@
 .edit-profile-link:hover {
   background-color: rgb(104, 207, 238);
 }
+
+.nav-link {
+  color: rgb(0, 0, 0);
+}
+
+.nav-link:hover {
+  color: rgb(110, 110, 110);
+}
+
+.nav-link:visited {
+  color: rgb(0, 0, 0);
+}

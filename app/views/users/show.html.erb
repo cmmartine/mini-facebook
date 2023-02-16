@@ -11,16 +11,19 @@
 
   <div class="content-wrapper">
   
-    <div class="content-wrapper-left">
+    <section class="content-wrapper-left">
       <% users_page = User.find(params[:id]) %>
-      <h1 class="page-header"><%= users_page.username %></h1>
+      <div class="name-avatar-container">
+        <%= image_tag user_avatar(users_page), class: "avatar-icon" %>
+        <h1 class="page-header"><%= users_page.username %></h1>
+      </div>
 
       <div class="friend-profile-container">
         <h3 class="friend-profile-header"><%= "About #{users_page.username}"%></h3>
         <p class="profile-info"><%= users_page.profile_information %></p>
         <% if current_user.id == users_page.id %>
           <turbo-frame id="profile_info">
-            <%= link_to "Edit", edit_user_path, class: "edit-profile-link" %>
+            <%= link_to "Edit 'About You'", edit_user_path, class: "edit-profile-link" %>
           </turbo-frame>
         <% end %>
       </div>
@@ -50,7 +53,7 @@
         <%= button_to "Send a friend request!", send_request_path(users_page), method: "put" %>
 
       <% end %>
-    </div>
+    </section>
 
     <% sorted_posts = [] %>
     <% if User.find(params[:id]).posts.any? %>
@@ -59,14 +62,14 @@
       <% end %>
     <% end %>
     
-    <div class="content-wrapper-right">
+    <main class="content-wrapper-right">
     
       <% if current_user.id == users_page.id %>
-        <div class="post-link-container">
+        <form class="post-link-container">
           <turbo-frame id="new_post">
             <%= link_to "Create a new post", new_post_path, class: "post-link" %>
           </turbo-frame>
-        </div>
+        </form>
       <% end %>
 
       <% sorted_posts.reverse.each do |post| %>
@@ -87,9 +90,11 @@
           <% end %>
 
           <p class="comment-header">Comments:</p>
-          <turbo-frame id="new_comment", class="comment-link-container">
-            <%= link_to "Comment", new_post_comment_path(post), class: "comment-link" %>
-          </turbo-frame>
+          <form>
+            <turbo-frame id="new_comment", class="comment-link-container">
+              <%= link_to "Comment", new_post_comment_path(post), class: "comment-link" %>
+            </turbo-frame>
+          </form>
           <div class="comment-content-container">
             <% post.comments.each do |comment| %>
               <p class="comment-body"><%= comment.body %></p>
@@ -99,7 +104,7 @@
           </div>
         </div>
       <% end %>
-    </div>
+    </main>
   </div>
 </body>
 </html>

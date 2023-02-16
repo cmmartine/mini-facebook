@@ -10,8 +10,9 @@ class User < ApplicationRecord
   has_many :likes
   has_many :sent_requests, class_name: :Request, foreign_key: :sending_user_id
   has_many :received_requests, class_name: :Request, foreign_key: :receiving_user_id
+  has_one_attached :avatar
 
-  validates :username, presence: true, length: { in: 2..18 }
+  validates :username, presence: true, length: { in: 2..50 }
   validates :profile_information, length: { in: 0..300 }, allow_blank: true
 
   def request_sent?(current_user, other_user)
