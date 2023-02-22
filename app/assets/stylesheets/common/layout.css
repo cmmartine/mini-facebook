@@ -1,5 +1,4 @@
 .content-wrapper {
-  min-width: 920px;
   width: 100%;
   max-width: 1920px;
   min-height: 100vh;
@@ -31,7 +30,6 @@
 }
 
 .notice {
-  min-width: 920px;
   width: 100%;
   max-width: 1920px;
   margin: auto;
@@ -39,9 +37,23 @@
 }
 
 .alert {
-  min-width: 920px;
   width: 100%;
   max-width: 1920px;
   margin: auto;
   background-color: rgb(104, 207, 238);
+}
+
+@media (max-width: 480px) {
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-wrapper-left {
+    width: 80%;
+  }
+
+  .content-wrapper-right {
+    width: 100%;
+  }
 }

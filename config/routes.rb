@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   root to: 'posts#index'
 
-  resources :posts do
-    resources :comments
+  resources :posts, only: [:index, :new, :create] do
+    resources :comments, only: [:new, :create]
   end
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

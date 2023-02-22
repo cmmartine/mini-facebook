@@ -25,16 +25,11 @@
   grid-row: 2 / 4;
 }
 
-.profile-info {
-  margin-bottom: 10px;
-  grid-row: 2;
-}
-
 .name-avatar-container {
   display: flex;
   flex-direction: column;
 }
 
 .avatar-icon {
-  width: 80px;
+  width: 60px;
 }

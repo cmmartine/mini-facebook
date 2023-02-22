@@ -1,5 +1,5 @@
 <div class="navbar">
-  <h2>Mini-Facebook</h2>
+  <h2 class="main-logo">Mini-Facebook</h2>
     
   <div class="nav-icon-container">
     <%= link_to root_path do %>
@@ -13,7 +13,7 @@
     <%= link_to user_path(current_user) do %>
       <%= image_tag user_avatar(current_user), class: "nav-icon", alt: "your profile" %>
     <% end %>
-    <p class="nav-text"><%= current_user.username %></p>
+    <%= link_to "#{current_user.username}", user_path(current_user), class: "nav-name-link" %>
 
     <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
       

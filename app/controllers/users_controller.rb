@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       flash[:notice] = 'Profile Information updated'
     else
-      flash[:notice] = 'Unable to update Profile Information, please try again'
+      flash[:notice] = 'Unable to update Profile Information, must be less than 300 characters.'
     end
 
     redirect_back fallback_location: root_path

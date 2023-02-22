@@ -54,13 +54,6 @@
 
       <% end %>
     </section>
-
-    <% sorted_posts = [] %>
-    <% if User.find(params[:id]).posts.any? %>
-      <% User.find(params[:id]).posts.each do |post| %>
-        <% sorted_posts << post %>
-      <% end %>
-    <% end %>
     
     <main class="content-wrapper-right">
     
@@ -71,6 +64,8 @@
           </turbo-frame>
         </form>
       <% end %>
+
+      <% sorted_posts = users_page.user_profile_post_sort %>
 
       <% sorted_posts.reverse.each do |post| %>
         <div class ="post-container">
@@ -89,18 +84,21 @@
             <% end %>
           <% end %>
 
-          <p class="comment-header">Comments:</p>
-          <form>
-            <turbo-frame id="new_comment", class="comment-link-container">
+          <form class="comment-link-container">
+            <turbo-frame id="new_comment">
               <%= link_to "Comment", new_post_comment_path(post), class: "comment-link" %>
             </turbo-frame>
           </form>
-          <div class="comment-content-container">
-            <% post.comments.each do |comment| %>
-              <p class="comment-body"><%= comment.body %></p>
-              <% comment_user = User.find_by(id: comment.user_id)%>
-              <p class="comment-user">- <%= link_to "#{comment_user.username}", user_path(comment_user.id), class: "profile-link" %></p>
-            <% end %>
+
+          <div class="comment-section-container">
+            <p class="comment-header">Comments:</p>
+            <div class="comment-content-container">
+              <% post.comments.each do |comment| %>
+                <p class="comment-body"><%= comment.body %></p>
+                <% comment_user = User.find_by(id: comment.user_id)%>
+                <p class="comment-user">- <%= link_to "#{comment_user.username}", user_path(comment_user.id), class: "profile-link" %></p>
+              <% end %>
+            </div>
           </div>
         </div>
       <% end %>

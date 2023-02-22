@@ -36,4 +36,26 @@ class User < ApplicationRecord
     end
     user
   end
+
+  def timeline_post_sort
+    sorted_posts = []
+    friendships.each do |f|
+      friend = User.find_by(id: f.friend_id)
+      friend.posts.each do |post|
+        sorted_posts << post
+      end
+    end
+    posts.each do |post|
+      sorted_posts << post
+    end
+    sorted_posts.sort_by!{ |post| post.created_at }
+  end
+
+  def user_profile_post_sort
+    sorted_posts = []
+    posts.each do |post|
+      sorted_posts << post
+    end
+    sorted_posts.sort_by!{ |post| post.created_at }
+  end
 end

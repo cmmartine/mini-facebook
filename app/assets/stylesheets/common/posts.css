@@ -1,7 +1,7 @@
 .post-container {
   display: grid;
   grid-template-columns: repeat(2, auto);
-  grid-template-rows: repeat(5, auto);
+  grid-template-rows: repeat(6, auto);
   min-width: 50%;
   width: 440px;
   max-width: 75%;
@@ -31,4 +31,3 @@
   grid-row: 2;
   margin-bottom: 5px;
 }
- 

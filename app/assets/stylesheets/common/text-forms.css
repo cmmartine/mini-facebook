@@ -1,0 +1,22 @@
+.text-form {
+  padding: 5px;
+  line-height: 1.5;
+}
+
+.profile-info {
+  margin-bottom: 10px;
+  grid-row: 2;
+}
+
+.requirements-submit {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 480px) {
+  .text-form {
+    width: 200px;
+    height: 130px;
+    margin: 5px;
+  }
+}

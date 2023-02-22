@@ -9,18 +9,20 @@
 
       <div>
         <%= image_tag user_avatar(current_user, 120), class: "nav-icon" %>
-        <p>We use gravatar for you avatar, to change it, please follow this link:</p>
+        <p>We use gravatar for your avatar, to change it, please follow this link:</p>
         <a href="https://en.gravatar.com/">Gravatar website</a>
       </div>
 
       <div class="field">
         <%= f.label :username %><br />
-        <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", pattern: "^(?=.{2,50}$).*" %>
+        <span class="error-message">Username must be between 2 and 50 characters</span>
       </div>
 
       <div class="field">
         <%= f.label :email %><br />
-        <%= f.email_field :email, autocomplete: "email" %>
+        <%= f.email_field :email, autocomplete: "email", pattern: "[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+" %>
+        <span class="error-message">Email must be in the form of: example@email.com</span>
       </div>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -29,11 +31,12 @@
 
       <div class="field">
         <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-        <%= f.password_field :password, autocomplete: "new-password" %>
+        <%= f.password_field :password, autocomplete: "new-password", pattern: "^(?=.{6,100}$).*" %>
         <% if @minimum_password_length %>
           <br />
           <em><%= @minimum_password_length %> characters minimum</em>
         <% end %>
+        <span class="error-message">Password must be at least 6 characters long.</span>
       </div>
 
       <div class="field">

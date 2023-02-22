@@ -1,6 +1,9 @@
 <turbo-frame id="new_post" target="_top">
   <%= form_with model: @post do |f| %>
     <%= f.text_area :body, size: "46x5", class: "text-form", autofocus: true %>
-    <%= f.submit "Create Post", class: "post-comment-submit" %>
+    <div class="requirements-submit">
+      <span>Post limit: 1-1000 characters</span>
+      <%= f.submit "Create Post", class: "post-comment-submit" %>
+    </div>
   <% end %>
 </turbo-frame>

@@ -1,5 +1,4 @@
 .devise-wrapper {
-  min-width: 920px;
   width: 100%;
   max-width: 1920px;
   min-height: 100vh;
@@ -33,4 +32,14 @@
 
 .actions {
   margin-bottom: 5px;
+}
+
+@media (max-width: 480px) {
+  .devise-wrapper {
+    align-items: center;
+  }
+
+  .devise-container {
+    width: 80%;
+  }
 }
