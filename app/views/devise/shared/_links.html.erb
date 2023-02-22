@@ -24,7 +24,7 @@
       url: omniauth_authorize_path(resource_name, provider),
       method: :post,
       data: {turbo: "false"} do |f| %>
-        <%= f.submit "", class: "google-sign-in" %>
+        <%= f.submit "Sign in with Google", class: "google-sign-in" %>
     <% end %> 
   <% end %>
 <% end %>
