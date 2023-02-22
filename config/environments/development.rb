@@ -43,8 +43,7 @@ Rails.application.configure do
 
   # Devise setup
   config.action_mailer.default_url_options = { host: 'cool-voice-7530.fly.dev' }
-
-  # letter_opener
+  
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.perform_deliveries = true
