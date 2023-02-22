@@ -54,7 +54,7 @@ Rails.application.configure do
     password: ENV['SENDMAIL_PASSWORD'],
     domain: 'cool-voice-7530.fly.dev',
     address: 'smtp.gmail.com',
-    port: '587',
+    port: 587,
     authentication: :plain,
     enable_starttls_auto: true
   }
@@ -86,3 +86,5 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 end
+
+Rails.application.routes.default_url_options[:host] = 'cool-voice-7530.fly.dev'
