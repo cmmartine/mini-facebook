@@ -30,3 +30,16 @@
   background-color: rgb(104, 207, 238);
   padding: 2px 4px;
 }
+
+.google-sign-in {
+  background-image: url("assets/btn_google_signin_dark_normal_web.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 170px;
+  height: 45px;
+  border-color: rgb(39, 133, 240);
+}
+
+.google-sign-in:hover {
+  border-color: rgb(3, 3, 138);
+}
