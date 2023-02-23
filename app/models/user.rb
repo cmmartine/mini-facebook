@@ -4,13 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
-  has_many :friendships
-  has_many :posts
-  has_many :comments
-  has_many :likes
-  has_many :sent_requests, class_name: :Request, foreign_key: :sending_user_id
-  has_many :received_requests, class_name: :Request, foreign_key: :receiving_user_id
-  has_one_attached :avatar
+  has_many :friendships, class_name: :Friendship, foreign_key: :user_id, dependent: :destroy
+  has_many :friends, class_name: :Friendship, foreign_key: :friend_id, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :sent_requests, class_name: :Request, foreign_key: :sending_user_id, dependent: :destroy
+  has_many :received_requests, class_name: :Request, foreign_key: :receiving_user_id, dependent: :destroy
+  has_one_attached :avatar, dependent: :destroy
 
   validates :username, presence: true, length: { in: 2..50 }
   validates :profile_information, length: { in: 0..300 }, allow_blank: true

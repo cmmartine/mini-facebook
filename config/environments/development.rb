@@ -41,9 +41,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  # Devise setup
   config.action_mailer.default_url_options = { host: 'cool-voice-7530.fly.dev' }
-  
+
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.perform_deliveries = true
@@ -85,5 +84,3 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 end
-
-Rails.application.routes.default_url_options[:host] = 'cool-voice-7530.fly.dev'

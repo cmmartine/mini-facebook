@@ -21,8 +21,11 @@
 }
 
 .friend-list {
+  display: flex;
+  flex-wrap: wrap;
   margin-bottom: 5px;
   grid-row: 2 / 4;
+  padding: 5px;
 }
 
 .name-avatar-container {

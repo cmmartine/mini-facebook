@@ -9,6 +9,10 @@ User.create!(username: 'Alfred', email: 'alfred@email.com', password: 'alfred1',
 
 User.create!(username: 'Becca', email: 'becca@email.com', password: 'becca1', password_confirmation: 'becca1', confirmed_at: '1999-12-29 13:01:23 UTC', confirmation_sent_at: '1999-12-29 13:01:24 UTC', profile_information: "Just a Becca girl living in a not Becca world.")
 
+User.create!(username: 'Curtis Moonshine', email: 'curtis@email.com', password: 'curtis1', password_confirmation: 'curtis1', confirmed_at: '2004-2-5 13:01:23 UTC', confirmation_sent_at: '2004-2-4 11:11:11 UTC')
+
+User.create!(username: 'Daniel Rudcliffe', email: 'daniel@email.com', password: 'daniel1', password_confirmation: 'daniel1', confirmed_at: '2008-7-29 13:01:23 UTC', confirmation_sent_at: '2008-6-10 12:12:12 UTC')
+
 Post.create!(body: 'This is the first testing post for this app!', user_id: 1, created_at: '2023-02-03 18:23:31 UTC')
 Post.create!(body: 'Y2k is a lie!', user_id: 2, created_at: '2000-01-01 00:00:00 UTC')
 Post.create!(body: 'Another post ', user_id: 2, created_at: '2043-06-13 11:12:13 UTC')
